@@ -1,23 +1,31 @@
 import React from 'react';
 import Photo from './Photo';
-import PropTypes from 'prop-types';
 
-const PhotoList = ({ photos, loading }) => {
-  if (loading) return <p>Loading...</p>;
-  if (!loading && photos.length === 0) return <p>No photos found</p>;
+function PhotoList({photos}) {
+    return (
+        <div className="photo-container">
+            <h2>Results</h2>
+        <ul>
+            {photos.length > 0 ? (
+                photos.map((photo) => (
+                 <Photo
+                key={photo.id}
+                server={photo.server}
+                id={photo.id}
+                secret={photo.secret}
+                title={photo.title}
+                />
+                ))
+         ) : (
+            <li className="not-found">
+                <h3>No results Found</h3>
+                <p>Your search did not return any results. Please try again</p>
 
-  return (
-    <ul>
-      {photos.map((photo) => (
-        <Photo key={photo.id} photo={photo} />
-      ))}
-    </ul>
-  );
-};
+            </li>
+        )}
+        </ul>
+        </div>
+    );
+}
 
-PhotoList.propTypes = {
-  photos: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired,
-};
-
-export default PhotoList;
+export default PhotoList

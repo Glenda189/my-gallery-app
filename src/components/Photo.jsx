@@ -1,17 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
 
-const Photo = ({ photo }) => {
-  const url = `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`;
-  return (
-    <li>
-      <img src={url} alt={photo.title} />
-    </li>
-  );
-};
-
-Photo.propTypes = {
-  photo: PropTypes.object.isRequired,
-};
-
-export default Photo;
+function Photo({ server, id, secret, title}) {
+    return (
+        <li>
+          <img 
+          src={`https://live.staticflickr.com/${server}/${id}_${secret}_m.jpg`}
+          alt={title}
+          />  
+        </li>
+    );
+}
+export default Photo
