@@ -1,17 +1,22 @@
-import React, {useState} from 'react';
+import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom';
+import {useState} from 'react'
 
-
+{/* function search passes onsearch as a prop and is called when a user submits a search*/}
 function Search ({onSearch}) {
+{/*state query variable is used to keep track of the current search input from the user*/}
     const [query, setQuery] = useState('');
+{/* navigate functions used usenavigate when a search is submitted and routed to the search*/}
     const navigate = useNavigate();
-
+{/*Updates query state depending on user unput in the search bar*/}
     const handleInputChange = (e) => {
         setQuery(e.target.value);
     };
+{/*function is triggered once the form is submitted*/}
     const handleSubmit = (e) => {
         e.preventDefault();
         onSearch(query);
+{/*uses navigate to change the URL to /search/input */}
         navigate(`/search/${query}`);
     };
 
@@ -34,4 +39,9 @@ function Search ({onSearch}) {
       </form>
     )
 }
+
+{/*Onsearch must be function and is required for component to work*/}
+Search.propTypes = {
+    onSearch: PropTypes.func.isRequired,
+};
 export default Search
